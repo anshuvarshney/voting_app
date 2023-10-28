@@ -89,9 +89,11 @@ It works fine now..
 ## Step-3:
 
 A Postgres database backed by a Docker volume.
-- Create a container for postgres db and it's version
-    ```bash
-    docker run -d --name=db postgres:9.4  
+- Create a container for postgres db and it's version  
+
+   ```bash
+    docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres:9.4
+  
     ```
 ## Step-4:
 A .NET worker which consumes votes and stores them in…
