@@ -44,7 +44,7 @@ A front-end web app in Python which lets you vote between two options
 - In the vote directory have Dockerfile 
 - Now build that application through the Dockerfile
     ```bash
-        docker build . -t voting-app 
+        docker build  -t voting-app . 
     ```
 
 - Check the docker images
@@ -54,7 +54,7 @@ A front-end web app in Python which lets you vote between two options
     voting-app image is in list.
 - Run the voting app on the localhost
     ```bash
-         docker run -d -p 5000:80 voting-app 
+           docker run -d -p 5000:80  voting-app
     ```
 - Now, open your web browser and access your voting-app container using the URL http://0.0.0.0:5000 . You should see the voting-app page on the following screen:
 
@@ -92,7 +92,7 @@ A Postgres database backed by a Docker volume.
 - Create a container for postgres db and it's version  
 
    ```bash
-    docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres:9.4
+    docker run --name=db -e POSTGRES_PASSWORD=postgres -d postgres:9.4
   
     ```
 ## Step-4:
@@ -106,11 +106,11 @@ A .NET worker which consumes votes and stores them in…
 
 - For build 
     ```bash
-        docker build . -t worker-app
+        docker build -t worker-app .
     ```
 Now, we can easily link the redis and database server postgres.
 ```bash
-    docker run -d --link redis:redis --link db:db worker-app
+    docker run -d --link=redis:redis --link=db:db worker-app
 ```
 Hence we connect properly till now.
 
@@ -126,7 +126,7 @@ This is the final step of our project...
     ```
 - Create a container for result of voting app
     ```bash
-       docker build . -t result-app
+       docker build -t result-app .
     ```
 - Now check the docker images
     ```bash
@@ -136,7 +136,7 @@ In output we have a multiple docker images.
 
 - Run the Result app on the localhost
     ```bash
-       docker run -d -p 5001:80 --link db:db postgres
+       docker run -d -p 5001:80 --link db:db result
     ```
 
 - Now, open your web browser and access your voting-app container using the URL http://0.0.0.0:5000 and also access your result-app container using the URL http://0.0.0.0:5001  . You should see the voting-app page and result page in different tab :
@@ -145,7 +145,12 @@ In output we have a multiple docker images.
 
 ### Check url and refresh it.....
 
-![Screenshot from 2023-10-27 14-48-32](https://github.com/anshuvarshney/POCs/assets/115215127/e0c7d721-f954-4b7b-823b-e1521720ca04)
+![Screenshot from 2024-02-08 12-23-09](https://github.com/anshuvarshney/voting_app/assets/115215127/e0aff95f-80f6-443d-a718-2bdac13024ce)
+![Screenshot from 2024-02-08 12-23-16](https://github.com/anshuvarshney/voting_app/assets/115215127/5afab38b-bc00-4fca-bdea-cb2c6ea63ac4)
+![Scree![Screenshot from 2024-02-08 13-06-03](https://github.com/anshuvarshney/voting_app/assets/115215127/b7833337-9909-495c-a2a5-a75213f1d3bd)
+
+![Screenshot from 2024-02-08 12-23-01](https://github.com/anshuvarshney/voting_app/assets/115215127/bb69391f-c7e2-4044-b299-abc93f84f578)
+
 
 ## Notes 
 The voting application only accepts one vote per client browser. It does not register additional votes if a vote has already been submitted from a client.
